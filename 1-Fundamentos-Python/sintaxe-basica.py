@@ -89,3 +89,73 @@ h, d, j, t = 89, 56.78, 'c', 'Edu'
 print(h, d, j, t)
 print()
 print(d, j, t, h)
+
+# ===================================================================================
+# AULA - 2
+print()
+print('=====================================================')
+print('MANIPULAÇÃO DE STRINGS')
+
+# vamos definir uma varivavel para receber como valor uma string/frase
+umaFrase = 'Hoje é um dia excelente!'
+
+# aqui, abaixo, serão exibidos os valores das manipulações
+
+print()
+print('-------- Manipulando a string----------------')
+print(umaFrase)
+
+print(umaFrase[0]) # aqui, o caractere [](colchete) assume uma nova funcionalidade: ele se torna o operador slice - "cortar/fatiar" - para "cortar/fatiar" a string num determinado "pedaço"
+
+'''
+    abaixo, na sequencia de caracteres, temos - de forma "implicita/oculta" - um sequencia numérica que indica, em ordem crescente, qual é a posição - dentro do conjunto de dados (string) - que cada "letra" ocupa
+
+
+INDICE POSICIONAL            0  1  2  3 4 5 6 7  8 9 10  11  12 13 14  15 16 17  18 19  20  21 22 23  24
+                             H  o  j  e   é   u  m   d   i   a     e   x   c  e  l   e   n   t    e   !
+
+'''
+
+print(umaFrase[2:13]) # neste, novamente, estamos executando um "fatiamento"! Só que, neste passo, estamos gerando um INTERVALO DE CARACTERES, ou seja, estamos criando um subconjunto ou uma substring - a partir do conjunto ou string anteriors. Esta é a operação que indica "extração" do seguinte subconjunto - [2:12]; isso significa que o "fatiamento" inicia no indice posicional 2 e vai até o indice posicional 12;
+
+# [..........[ - intervalo semi-aberto: o intervalo semi-aberto determina que: no intervalor deve-se incluir o 1º elemento e excluir-se o ultimo elemento da composição do intervalo - a partir da seguinte operação -> [2:12] (-1) = [2:11]
+
+print(umaFrase[:8]) # novamente, temos um novo "fatiamento" gerando um novo intervalo!
+# [..........[ - intervalo semi-aberto: o intervalo semi-aberto determina que: no intervalor deve-se incluir o 1º elemento e excluir-se o ultimo elemento da composição do intervalo - a partir da seguinte operação -> [:8] (-1) = [:7]
+
+print(umaFrase[3:]) # novamente, temos um novo "fatiamento" gerando um novo intervalo! O intervalo começa no indice posicional 3 e vai até o ultimo indice posicional que compõe o intervalo. Portanto, o conceito de intervalo semi-aberto não se aplica!
+
+print(umaFrase[1], umaFrase[10], umaFrase[20]) # toda a vez que precisamos acessar indice posicionais distintos, ao mesmo tempo, dentro de uma string, fazemos o seguinte: acessamos a string - separada por virgula - repetidas vezes e indicamos o valor do indice posicional
+
+print(umaFrase * 3) # aqui, nesta operação, estamos "dizendo" qu queremos que o valor da variavel 'umaFrase' seja REPETIDA/MULTIPLICADA tres vezes
+
+print(umaFrase + ' Muito bom ! Que todos os dias sejam assim.') # aqui, nesta operação, estamos dizendo que queremos associar/ligar/concatenar/juntar o valor da variavel 'umaFrase' ao novo texto/frase que indicamos depois do operador(+) plus/mais
+
+
+print('Alexandre exemplo 1:  ' + umaFrase[1], umaFrase[10]) # uma virgula NÃO CONCATENA ELEMENTOS! UMA VIRGULA, NO PYTHON, SEPARA/SEGREGA ARGUMENTOS!
+
+print('Alexandre exemplo 2:  ' + umaFrase[1] + umaFrase[10])
+print()
+
+print('===========================================================================')
+print('ALTERAR UMA STRING')
+
+# vamos definir uma nova frase
+
+novaFrase = 'Amanhã, também, será excelente!'
+print('Alterando a string: ', 'Depois de amanhã,', novaFrase[7:])
+
+# vamos definir uma nova variavel com um novo valor
+nome  = 'Guilherme'
+print('O nome do meu amigo é %s, ele tem %d anos de idade.' % (nome, 21))
+
+# aqui, acima, estamos usando o operador % (aqui, no "papel" de operador de FORMATAÇÃO DE SAIDA DE STRING) -> %s %d significa que: pela ordem posicional o caratere %s espera  uma string - anda deiferente disso - e o operador de formatação %d espera um valor numérico - nada diferente disso!
+
+print('==============================================================')
+ # definir uma nova variavel para observar o uso de uma formatação de saida extremamente comum. Provavelmente, usaremos com maior frequencia 
+
+novoNome = 'Bruno'
+idade = 37
+print(f'O nome do meu amigo é {novoNome} e ele tem {idade} anos de idade!')
+
+# (f''): f-string: formato que "junta/concatena/liga/interpola ("mistura ao mesmo tempo") elementos literais de string com valores de variaveis"
