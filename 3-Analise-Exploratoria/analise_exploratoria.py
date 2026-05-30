@@ -2,16 +2,30 @@
 Para alimentar uma analise exploratoria/estatistica de dados sugere-se o seguinte cntexto de trabalho:
 
 1. Carregamento e compreensão dos dados 
+Leitura do CSV com nomes de colunas.
+Identificação e exibição das colunas.
+
 
 2. Analise Estatistica descritiva
+Cálculo de média, mediana, desvio padrão, variância, mínimos e máximos.
+Análise por espécie (ex.: média do comprimento da pétala para Setosa, Versicolor, Virginica).
 
 3. Exploração da distribuição dos dados
+Contagem de cada espécie.
+Cálculo de quartis (Q1, Q2, Q3).
+
 
 4. Filtragem condicional
+Seleção de registros com comprimento da sépala maior que 5.0.
+
 
 5. Relação entre as variaveis
+Correlação entre comprimento e largura da pétala.
+Matriz de correlação entre todas as variáveis numéricas.
+
 
 6. Normalização e padronização dos dados
+Aplicação de normalização min-max e padronização (z-score) para futuras análises.
 '''
 
 # para esta analise exploratoria vamos usar alguns recursos importantes:
@@ -28,6 +42,22 @@ dados = np.genfromtxt('iris_com_colunas.csv', delimiter=',', dtype=None, encodin
 print()
 print(dados)
 print()
+
+'''
+np.genformtxt(...): é uma função numpy usada para ler arquivos de texto como, por exemplo, .csv
+
+'iris_com_colunas.csv': nome do arquivo de dados que estamos carregando
+
+delimiter=',': indicando que os dados estão separados por virgula (este é o padrão dos arquivos .csv)
+
+dtype=None: permite que o Numpy "deduza" automaticamente o tipo de dados de cada coluna(float, string, etc.)
+
+enconding='utf-8': estamos tentando garantir que caracteres especiais possam ser lidos sem erro
+
+names=True: significa que a primeira linha do arquivo contem os nomes das colunas e deve ser usada como cabeçalho
+
+invalid_raise=False: faz com que as linhas que possam apresentar eventuais problemas ou dados ausentes sejam ignoradas ao inves de causar um erro de carregamento/leitura de dados
+'''
 
 # -------------------------------------------------------------------------
 
