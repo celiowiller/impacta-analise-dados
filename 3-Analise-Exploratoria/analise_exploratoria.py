@@ -132,3 +132,124 @@ print()
 # passo 9: observação do uso da função np.unique() para operar com valores unicos
 especies_unicas = np.unique(especies)
 print('Valor da var especies_unicas: ', especies_unicas)
+ 
+# --------------------------------------------------------------------
+# - AULA 7
+
+# passo 10: vamos definir um loop para iterar/percorrer os valores atribuidos a variavel especies_unicas
+for obs in especies_unicas:
+    # agora, vamos criar uma var para dar a ela um valor
+    especies_dados = dados[especies == obs] # aqui, estamos comparando os valores encontrados pela var iteradora em relação aos valores que foram atribuidos a var especies 
+
+
+    # neste passo, vamos criar uma nova var que receberá como valor o calculo de uma media 
+    media_petal_length = np.mean(especies_dados['petal_length'])
+    print(f'Media do comprimento da pelata para {obs} : {media_petal_length :.2f}')
+
+'''
+este trecho de codigo, acima, está calculando a média do comprimento da pétala(pental_length); para cada conjunto de dados 
+'''
+
+# passo 11: QUARTIS
+print()
+print('----------- Quartis ----------------')
+# definindo os quartis para o comprimento da sépala
+q1 = np.percentile(sepal_length, 25)
+q2 = np.percentile(sepal_length, 50)
+q3 = np.percentile(sepal_length, 75)
+
+# exibir os quartis
+print(f'1º QUARTIL do comprimento da sépala: {q1}')
+print(f'2º QUARTIL do comprimento da sépala: {q2}')
+print(f'3º QUARTIL do comprimento da sépala: {q3}')
+
+# passo 12: FILTRAGEM CONDICIONAL
+print()
+print('----------- Filtragem condicional ----------------')
+# definir um "filtro" para que tenhamos uma seleção a partir de uma condição
+# 1ª condição
+filtro = dados[dados['sepal_length'] > 5.0]
+print(f'Dados com o comprimento da sépala maior que 5.0: {filtro}')
+print()
+print('----------- Filtragem condicional - mais de uma condição ----------------')
+print('-------------- operador logico AND/ E ---------------')
+filtrosAnd = dados[
+                    # 2ª condicão
+                    (dados['sepal_width'] > 3.0) & # OPERADOR LÓGICO AND
+                    # 3ª condicão
+                    (dados['petal_length'] > 1.5) &
+                    # 4ª condicão
+                    (dados['petal_width'] <= 2.0) &
+                    # 5ª condicão
+                    (dados['species'] == 'Setosa')
+                ]
+print(f'Dados com outras condicionais: {filtrosAnd}')
+
+print()
+print('-------------- operador logico OR/ OU ---------------')
+filtrosOr = dados[
+                    # 2ª condicão
+                    (dados['sepal_width'] > 3.0) | # OPERADOR LÓGICO OR
+                    # 3ª condicão
+                    (dados['petal_length'] > 1.5) |
+                    # 4ª condicão
+                    (dados['petal_width'] <= 2.0) |
+                    # 5ª condicão
+                    (dados['species'] == 'Setosa')
+                ]
+print(f'Dados com outras condicionais: {filtrosOr}')
+
+
+# passo 13: Relação entre as variaveis
+print()
+print('----------- CORRELAÇÃO ----------------')
+# definir uma var para recebe como valor a função qeu vai auxiliar na analise da correlação entre as vars
+correlacao = np.corrcoef(petal_length, petal_width)[0, 1]
+print(f'Correlação entre o comprimento e a largura da pétala: {correlacao: .2f}')
+
+'''
+np.corrcoef(petal_length, petal_width): função Numpy que calcula a correlação de Pearson entre duas vars: petal_length, petal_width
+
+a correlação de Pearson mede a "força" e a direção de uma relação entre duas variaveis numéricas. O resultado da matriz de correlação 2x2 é esta 
+     0     1
+0 [[1.0, 0.96]
+1  [0.96, 1.0]]
+
+acima, a diagonal terá sempre o valor 1.0(este valor determina a correlação de uma com ela mesma)
+
+mas, o valo mais importante para a nossa analise está fora da diagonal: 0.96 (este valor determina a correlação entre as variaveis analisadas)
+
+interpretando a sadia -> 0.96: indica que há uma correlação muito forte entre as vars; ou seja, quanto maior o comprimento, mairo a largura e vice-versa! Porque o indice de correlação esta mais proximo de 1.0 - 0.96; e muito longe od valor 0.0.
+'''
+# passo 14: Grafico com SEABORN
+print()
+print('----------- GRAFICO ----------------')
+# indicar o "estilo visual" do grafico
+
+sns.set_theme(style = 'whitegrid') # indica que a grade do grafico será clara
+plt.figure(figsize = (8, 5)) # 8" de largura x 5" de altura
+
+# nosso gráfico será um grafico de dispersão
+sns.scatterplot(x = petal_length, y = petal_width, color = 'blue', s = 60) 
+
+# agora, o grafico de dispersão de valores entre as vars esta definido. Vamos estabelecer a linha de tendencia(regressão linear)
+sns.regplot(x = petal_length, y = petal_width, color = 'red', scatter = False)
+'''
+scatter = False: impede que os pontos, da dispersão, sejam repetidos, pois já foram exibidos pela função scatterplot()
+'''
+# adicionar os titulos/labels(rotulos/nomenclaturas) no grafico
+plt.title('Correlação entre o comprimento e largura da pétala ', fontsize = 14)
+plt.ylabel('Largura da pétala', fontsize = 12)
+plt.xlabel('Comprimeto da pétala', fontsize = 12)
+
+# definir a exibição do valor da correlação diretamente no grafico
+correlacao = np.corrcoef(petal_length, petal_width)[0, 1]
+
+# adicionar um texto, ao grafico, com o valor da correlação
+plt.text(min(petal_length), max(petal_width) * 0.9, f'Correlação: {correlacao: .2f}')
+'''
+plt.text(min(petal_length), max(petal_width) * 0.9: aqui, estamos ajustando a posição do texto para a exibição do indice do correlaçã dentro do grafico
+'''
+# ajustar o layout 
+plt.tight_layout()
+plt.show()
